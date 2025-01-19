@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers;
+use App\Http\Controllers\LocaleController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -21,7 +22,7 @@ Route::prefix('/ConnectFriend')->group(function(){
 
    Route::get('/Member/{id}', [Controllers\MemberController::class, 'DetailMember'])->name('detailmember')->middleware('auth');
 
-   Route::post('/Member/addfriend', [Controllers\FriendController::class, 'AddNewFriend'])->name('addnewfriend');
+   Route::post('/Member/addfriend', [Controllers\FriendController::class, 'AddNewFriend'])->name('addnewfriend')->middleware('auth');
 
    Route::get('/Login', [Controllers\UserController::class, 'ShowPage1'])->name('login');
 
@@ -39,4 +40,5 @@ Route::prefix('/ConnectFriend')->group(function(){
 
    Route::put('/UpdateProfile', [Controllers\ProfileController::class, 'UpdateProfile'])->name('updateprofile');
 
+   Route::get('locale/{lang}', [Controllers\LocaleController::class, 'setLocale']);
 });

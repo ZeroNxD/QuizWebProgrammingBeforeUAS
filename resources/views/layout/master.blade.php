@@ -82,24 +82,34 @@
                         : asset('assets/Default Picture.png') }}" 
                         alt="{{ auth()->check() ? auth()->user()->name : 'Guest' }}'s profile" 
                         style="border-radius: 50%; margin-bottom: 20px; width:116px; height:116px">                    
-                    <h5 style="font-weight: bold">{{ auth()->user()->name ?? 'Guest' }}</h5>
+                    <h5 style="font-weight: bold">@lang('menubar.welcome'), {{ auth()->user()->name ?? 'Guest' }}</h5>
                     <p style="font-weight: bold">{{ auth()->user()->email ?? '' }}</p>
                 </div>
 
-                <a href="{{route('home')}}" class="{{ Route::is('home') ? 'active' : '' }}">Home</a>
-                <a href="{{route('profilepage')}}" class="{{ Route::is('profilepage') ? 'active' : '' }}">Profile</a>
-                <a href="{{route('memberlist')}}" class="{{ Route::is('memberlist') ? 'active' : '' }}">Member List</a>
-                <a href="{{route('friendlist')}}" class="{{ Route::is('friendlist') ? 'active' : '' }}">Friend List</a>
+                <a href="{{route('home')}}" class="{{ Route::is('home') ? 'active' : '' }}">@lang('menubar.home')</a>
+                <a href="{{route('profilepage')}}" class="{{ Route::is('profilepage') ? 'active' : '' }}">@lang('menubar.profile')</a>
+                <a href="{{route('memberlist')}}" class="{{ Route::is('memberlist') ? 'active' : '' }}">@lang('menubar.memberList')</a>
+                <a href="{{route('friendlist')}}" class="{{ Route::is('friendlist') ? 'active' : '' }}">@lang('menubar.friendList')</a>
+                <div class="dropdown">
+                    <a class="btn btn-secondary dropdown-toggle"  id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        @lang('menubar.language')
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li><a class="dropdown-item" href="{{ url('ConnectFriend/locale/en') }}" style="color:black;">@lang('menubar.english')</a></li>
+                        <li><a class="dropdown-item" href="{{ url('ConnectFriend/locale/id') }}" style="color:black;">@lang('menubar.indonesia')</a></li>
+                    </ul>
+                </div>
+                
                 
                 @auth
                     <form action="{{ route('logoutuser')}}" method="POST" class="d-inline">
                         @csrf
-                        <button type="submit" class="btn btn-link text-white" style="text-decoration: none;">Logout</button>
+                        <button type="submit" class="btn btn-link text-white" style="text-decoration: none;">@lang('menubar.logout')</button>
                     </form>
                 @else
                     <div class="d-flex gap-2" style="padding: 20px; margin-bottom: 20px; justify-content:center;" >
-                        <a href="{{route('login')}}" class="{{ Route::is('login') ? 'active' : '' }}" style="border: 3px solid white; margin-right: 20px">Login</a>
-                        <a href="{{route('register')}}" class="{{ Route::is('register') ? 'active' : '' }}" style="border: 3px solid white;">Register</a>
+                        <a href="{{route('login')}}" class="{{ Route::is('login') ? 'active' : '' }}" style="border: 3px solid white; margin-right: 20px">@lang('menubar.login')</a>
+                        <a href="{{route('register')}}" class="{{ Route::is('register') ? 'active' : '' }}" style="border: 3px solid white;">@lang('menubar.register')</a>
                     </div>
                 @endauth
             </div>
@@ -125,5 +135,6 @@
     @include('layout.footer')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </body>
 </html>
